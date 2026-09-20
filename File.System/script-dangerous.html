@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚠️ CLASSIFIED</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Share+Tech+Mono&family=Creepster&display=swap');
+
+  :root {
+    --red: #c0392b;
+    --dark: #0a0a0a;
+    --steel: #2c3e50;
+    --tape: #f5c842;
+    --paper: #e8dcc8;
+    --ink: #1a1a2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── PAGE SYSTEM ─── */
+  .page {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .page.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+  }
+
+  /* ════════════════════════════
+         PAGE 1 — LOCKER
+     ════════════════════════════ */
+  #page1 {
+    background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+  }
+
+  .ambient-text {
+    position: absolute;
+    top: 20px;
+    font-size: 11px;
+    color: #222;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .locker-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .locker {
+    position: relative;
+    width: 220px;
+    height: 300px;
+    background: linear-gradient(135deg, #3d3d3d 0%, #1a1a1a 40%, #2d2d2d 60%, #111 100%);
+    border-radius: 8px;
+    border: 3px solid #444;
+    box-shadow:
+      inset 2px 2px 8px rgba(255,255,255,0.05),
+      inset -2px -2px 8px rgba(0,0,0,0.8),
+      0 0 40px rgba(0,0,0,0.9),
+      0 20px 60px rgba(0,0,0,0.8);
+  }
+
+  /* Steel texture stripes */
+  .locker::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 18px,
+      rgba(255,255,255,0.02) 18px,
+      rgba(255,255,255,0.02) 19px
+    );
+    border-radius: 6px;
+  }
+
+  /* Locker handle */
+  .locker-handle {
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 60px;
+    background: linear-gradient(90deg, #555, #888, #555);
+    border-radius: 4px;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.6);
+  }
+
+  /* Locker rivets */
+  .rivet {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle at 35% 35%, #666, #222);
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  }
+  .rivet:nth-child(1) { top: 12px; left: 12px; }
+  .rivet:nth-child(2) { top: 12px; right: 12px; }
+  .rivet:nth-child(3) { bottom: 12px; left: 12px; }
+  .rivet:nth-child(4) { bottom: 12px; right: 12px; }
+
+  /* Horizontal split line */
+  .locker-line {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #333, transparent);
+  }
+
+  /* TAPE strips */
+  .tape {
+    position: absolute;
+    background: rgba(245, 200, 66, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 9px;
+    color: #333;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  .tape-1 {
+    width: 260px;
+    height: 26px;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%) rotate(-6deg);
+    font-size: 8px;
+    padding: 0 10px;
+    text-align: center;
+    z-index: 10;
+    word-spacing: 2px;
+  }
+
+  .tape-2 {
+    width: 260px;
+    height: 22px;
+    top: 48%;
+    left: 50%;
+    transform: translateX(-50%) rotate(4deg);
+    font-size: 8px;
+    padding: 0 10px;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .tape-3 {
+    width: 20px;
+    height: 260px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(35deg);
+    z-index: 9;
+    opacity: 0.6;
+  }
+
+  /* WARNING sticker */
+  .warning-sticker {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c0392b;
+    color: #fff;
+    font-size: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 3px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    z-index: 11;
+  }
+
+  /* ─── PIN PAD ─── */
+  .pin-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pin-label {
+    color: #555;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .pin-display {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .pin-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid #333;
+    background: transparent;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .pin-dot.filled {
+    background: #c0392b;
+    border-color: #c0392b;
+    box-shadow: 0 0 6px rgba(192,57,43,0.6);
+  }
+
+  .pin-keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 52px);
+    gap: 8px;
+  }
+
+  .pin-key {
+    height: 44px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    color: #aaa;
+    font-size: 16px;
+    font-family: 'Share Tech Mono', monospace;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.1s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pin-key::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+  }
+
+  .pin-key:hover {
+    background: #1a1a1a;
+    border-color: #444;
+    color: #fff;
+  }
+
+  .pin-key:active {
+    background: #1e0000;
+    border-color: var(--red);
+    color: var(--red);
+    transform: scale(0.96);
+  }
+
+  .pin-key.del {
+    color: #555;
+    font-size: 18px;
+  }
+
+  .pin-key.enter {
+    grid-column: span 3;
+    height: 40px;
+    background: linear-gradient(135deg, #1a0000, #2d0000);
+    border-color: #400;
+    color: #c0392b;
+    font-size: 11px;
+    letter-spacing: 4px;
+  }
+
+  .pin-key.enter:hover {
+    background: linear-gradient(135deg, #2d0000, #400);
+    border-color: #c0392b;
+    color: #ff6b6b;
+  }
+
+  .pin-error {
+    color: #c0392b;
+    font-size: 10px;
+    letter-spacing: 2px;
+    height: 16px;
+    animation: shake 0.3s ease;
+  }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+  }
+
+  /* ════════════════════════════
+         PAGE 2 — DOCUMENTS
+     ════════════════════════════ */
+  #page2 {
+    background: #0d0d0d;
+    overflow: hidden;
+  }
+
+  .page2-inner {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 30px 20px 80px;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2a #0d0d0d;
+  }
+
+  .page2-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .page2-header h1 {
+    font-family: 'Creepster', cursive;
+    font-size: 28px;
+    color: #c0392b;
+    letter-spacing: 6px;
+    text-shadow: 0 0 20px rgba(192,57,43,0.4);
+  }
+
+  .page2-header p {
+    color: #333;
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-top: 6px;
+  }
+
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ─── DOCUMENT CARDS ─── */
+  .doc-card {
+    position: relative;
+    background: linear-gradient(160deg, #e8dcc8 0%, #d4c8a8 100%);
+    border-radius: 2px;
+    padding: 20px;
+    box-shadow:
+      0 4px 20px rgba(0,0,0,0.8),
+      inset 0 0 30px rgba(0,0,0,0.05);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+  }
+
+  .doc-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.9);
+    z-index: 10;
+  }
+
+  /* Paper lines */
+  .doc-card::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    background: repeating-linear-gradient(
+      transparent 0px,
+      transparent 23px,
+      rgba(0,0,0,0.08) 23px,
+      rgba(0,0,0,0.08) 24px
+    );
+    pointer-events: none;
+  }
+
+  /* Red margin line */
+  .doc-card::after {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(192,57,43,0.3);
+  }
+
+  .doc-stamp {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: 'Special Elite', cursive;
+    font-size: 9px;
+    color: rgba(192,57,43,0.6);
+    border: 1.5px solid rgba(192,57,43,0.4);
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: 2px;
+    transform: rotate(8deg);
+  }
+
+  .doc-title {
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    color: #1a1a2e;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    letter-spacing: 1px;
+  }
+
+  .doc-body {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: #2a2020;
+    line-height: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── NOTEBOOK / NOTE ─── */
+  .notebook {
+    grid-column: 1 / -1;
+    background: linear-gradient(160deg, #faf0d0 0%, #e8d5a8 100%);
+    padding: 24px 24px 24px 60px;
+    transform: rotate(-0.5deg);
+    position: relative;
+    border-left: 4px solid #c85a5a;
+  }
+
+  .notebook::after {
+    left: 60px;
+  }
+
+  /* Spiral holes */
+  .spiral {
+    position: absolute;
+    left: 18px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    gap: 0;
+  }
+
+  .spiral-hole {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #0d0d0d;
+    border: 2px solid #aaa;
+    flex-shrink: 0;
+  }
+
+  .notebook .doc-body {
+    white-space: pre-line;
+    line-height: 24px;
+    color: #1a0a0a;
+  }
+
+  .redacted {
+    background: #1a1a1a;
+    color: transparent;
+    user-select: none;
+    border-radius: 2px;
+    display: inline;
+    padding: 0 2px;
+  }
+
+  .scratched {
+    text-decoration: line-through;
+    text-decoration-color: #1a0a0a;
+    text-decoration-thickness: 2px;
+    opacity: 0.7;
+  }
+
+  /* ─── SCRIPT CARD ─── */
+  .script-card {
+    background: #0f0f0f;
+    border: 1px solid #1e0000;
+    border-radius: 6px;
+    overflow: hidden;
+    transform: none !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 0 1px #1a0000;
+  }
+
+  .script-card::before, .script-card::after { display: none; }
+
+  .script-header {
+    background: #1a0000;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #2d0000;
+  }
+
+  .script-filename {
+    font-size: 11px;
+    color: #c0392b;
+    letter-spacing: 1px;
+  }
+
+  .script-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .script-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #333;
+  }
+
+  .script-body {
+    padding: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.7;
+    white-space: pre;
+    overflow-x: auto;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .script-body:hover {
+    background: #0a0000;
+  }
+
+  .comment { color: #2d2d2d; }
+  .keyword { color: #8b0000; }
+  .string { color: #5a4a00; }
+  .func { color: #444; }
+  .blocked { color: #1a0000; background: #100; border-radius: 2px; padding: 0 2px; }
+
+  .copy-hint {
+    font-size: 9px;
+    color: #2a2a2a;
+    padding: 6px 14px;
+    background: #0a0a0a;
+    letter-spacing: 2px;
+    border-top: 1px solid #111;
+  }
+
+  .copy-flash {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20,0,0,0.95);
+    border: 1px solid #c0392b;
+    color: #c0392b;
+    font-size: 12px;
+    letter-spacing: 3px;
+    padding: 12px 28px;
+    border-radius: 4px;
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .copy-flash.show {
+    opacity: 1;
+  }
+
+  /* ─── BACK BUTTON ─── */
+  .back-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #100;
+    border: 1px solid #300;
+    color: #555;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 100;
+  }
+
+  .back-btn:hover {
+    color: #c0392b;
+    border-color: #c0392b;
+  }
+
+  /* ─── GLITCH TRANSITION ─── */
+  .glitch-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9997;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .glitch-overlay.active {
+    animation: glitch-in 0.8s ease forwards;
+  }
+
+  @keyframes glitch-in {
+    0% { opacity: 0; }
+    10% { opacity: 1; background: #100; }
+    20% { opacity: 0.3; transform: translateX(-4px); }
+    30% { opacity: 1; background: #000; }
+    40% { opacity: 0.5; transform: translateX(4px); }
+    50% { opacity: 1; background: #0a0000; }
+    70% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(0); }
+  }
+
+  /* scanline */
+  .scanline {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* responsive */
+  @media (max-width: 500px) {
+    .locker { width: 180px; height: 250px; }
+    .tape-1, .tape-2 { width: 220px; font-size: 7px; }
+    .tape-3 { width: 16px; height: 220px; }
+    .pin-keypad { grid-template-columns: repeat(3, 46px); }
+    .pin-key { height: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scanline"></div>
+<div class="glitch-overlay" id="glitchOverlay"></div>
+<div class="copy-flash" id="copyFlash">SCRIPT COPIED</div>
+
+<!-- ════════════ PAGE 1 ════════════ -->
+<div class="page" id="page1">
+  <div class="ambient-text">⚠ CLASSIFIED STORAGE — AUTHORIZED ACCESS ONLY ⚠</div>
+
+  <div class="locker-wrap">
+    <!-- LOCKER -->
+    <div class="locker">
+      <div class="rivet"></div>
+      <div class="rivet"></div>
+      <div class="rivet"></div>
+      <div class="rivet"></div>
+      <div class="locker-handle"></div>
+      <div class="locker-line"></div>
+      <div class="warning-sticker">⚠ RESTRICTED</div>
+
+      <!-- TAPE -->
+      <div class="tape tape-3"></div>
+      <div class="tape tape-1">Script Dangerous, Not For To Use</div>
+      <div class="tape tape-2">⚠ DO NOT OPEN ⚠</div>
+    </div>
+
+    <!-- PIN PAD -->
+    <div class="pin-section">
+      <div class="pin-label">Enter PIN to unlock</div>
+      <div class="pin-display" id="pinDisplay">
+        <div class="pin-dot" id="d0"></div>
+        <div class="pin-dot" id="d1"></div>
+        <div class="pin-dot" id="d2"></div>
+        <div class="pin-dot" id="d3"></div>
+        <div class="pin-dot" id="d4"></div>
+        <div class="pin-dot" id="d5"></div>
+      </div>
+      <div class="pin-keypad">
+        <button class="pin-key" onclick="pressKey('1')">1</button>
+        <button class="pin-key" onclick="pressKey('2')">2</button>
+        <button class="pin-key" onclick="pressKey('3')">3</button>
+        <button class="pin-key" onclick="pressKey('4')">4</button>
+        <button class="pin-key" onclick="pressKey('5')">5</button>
+        <button class="pin-key" onclick="pressKey('6')">6</button>
+        <button class="pin-key" onclick="pressKey('7')">7</button>
+        <button class="pin-key" onclick="pressKey('8')">8</button>
+        <button class="pin-key" onclick="pressKey('9')">9</button>
+        <button class="pin-key del" onclick="pressKey('del')">⌫</button>
+        <button class="pin-key" onclick="pressKey('0')">0</button>
+        <button class="pin-key" onclick="pressKey('0')" style="visibility:hidden"></button>
+        <button class="pin-key enter" onclick="submitPin()">U N L O C K</button>
+      </div>
+      <div class="pin-error" id="pinError"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ PAGE 2 ════════════ -->
+<div class="page hidden" id="page2">
+  <div class="page2-inner">
+    <div class="page2-header">
+      <h1>⚠ CLASSIFIED FILES ⚠</h1>
+      <p>ACCESS GRANTED — HANDLE WITH CAUTION</p>
+    </div>
+
+    <div class="doc-grid">
+
+      <!-- NOTEBOOK / CATATAN -->
+      <div class="doc-card notebook" style="--rot: -0.5deg">
+        <div class="spiral">
+          <div class="spiral-hole"></div>
+          <div class="spiral-hole"></div>
+          <div class="spiral-hole"></div>
+          <div class="spiral-hole"></div>
+          <div class="spiral-hole"></div>
+          <div class="spiral-hole"></div>
+          <div class="spiral-hole"></div>
+        </div>
+        <div class="doc-stamp">PERSONAL</div>
+        <div class="doc-title">📓 Catatan Penelitian</div>
+        <div class="doc-body">
+<b>Day 1:</b>
+Aku dan AI ku sedang membuat script yang bisa
+mengubah langsung ke Workspace Roblox dan
+berada di client. Kami yakin ini bisa berjalan.
+
+<b>Day 2:</b>
+Kita pun selesai berencana dan kita mulai
+mengcoding nya...
+
+Tetapi..
+
+<b>Day 3 (terakhir) :</b>
+Kita... Tanpa sengaja membuat script tersebut
+Error dan... Menyebar ke seluruh server dan
+menyebabkan kerusakan pada desain orang-orang
+dan server nya mulai mengacau dan saat itu..
+Aku telah putus asa da—
+<span class="redacted">████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span>
+<span class="scratched">aku tidak pernah menyangka ini akan terjadi, kita seharusnya tidak melanjutkan eksperimen ini sejak awal, sekarang sudah terlambat dan segalanya sudah —</span>
+<span class="redacted">################ ########### ######</span>
+        </div>
+      </div>
+
+      <!-- TUTORIAL DOC 1 -->
+      <div class="doc-card" style="--rot: 1.5deg">
+        <div class="doc-stamp">TUTORIAL</div>
+        <div class="doc-title">📄 Research Notes v0.1</div>
+        <div class="doc-body">
+Metode awal yang kami gunakan:
+
+1. Hook ke RemoteEvent via client
+2. Inject ke Workspace melalui
+   LocalScript container
+3. Bypass FilteringEnabled dengan
+   cara yang belum pernah ada
+4. Replicate ke seluruh server...
+
+Catatan: langkah no. 4 adalah
+kesalahan fatal kami.
+
+Status: <span class="redacted">████████</span>
+        </div>
+      </div>
+
+      <!-- TUTORIAL DOC 2 -->
+      <div class="doc-card" style="--rot: -2deg">
+        <div class="doc-stamp">CLASSIFIED</div>
+        <div class="doc-title">📋 Technical Report</div>
+        <div class="doc-body">
+Error log — 03/??/20??
+────────────────────────
+[FATAL] Script propagation
+        detected
+[ERROR] Workspace corruption
+        spreading to 47 servers
+[WARN]  Player data integrity
+        compromised
+[FATAL] <span class="redacted">████████████████</span>
+[FATAL] <span class="redacted">████████████████</span>
+[INFO]  Shutdown initiated...
+[INFO]  Too late.
+────────────────────────
+Recovery status: FAILED
+        </div>
+      </div>
+
+      <!-- SCRIPT CARD 1 -->
+      <div class="doc-card script-card">
+        <div class="script-header">
+          <span class="script-filename">WorkspaceCorruptor.lua</span>
+          <div class="script-dots">
+            <span style="background:#c0392b"></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="script-body" onclick="copyScript(this, 0)"><span class="comment">-- [CLASSIFIED] WorkspaceCorruptor.lua
+-- ⚠ WARNING: This script caused the incident
+-- DO NOT EXECUTE under any circumstance</span>
+
+<span class="keyword">local</span> RS = game:GetService(<span class="string">"RunService"</span>)
+<span class="keyword">local</span> WS = game:GetService(<span class="string">"Workspace"</span>)
+<span class="keyword">local</span> Players = game:GetService(<span class="string">"Players"</span>)
+
+<span class="comment">-- [REDACTED INITIALIZATION]</span>
+<span class="blocked">████████████████████████████████████</span>
+<span class="blocked">████████████████████████████████████</span>
+
+<span class="keyword">local function</span> <span class="func">propagate</span>(target)
+  <span class="comment">-- [SECTION CORRUPTED]</span>
+  <span class="blocked">████████████████████████</span>
+  <span class="keyword">for</span> _, obj <span class="keyword">in</span> pairs(target:GetDescendants()) <span class="keyword">do</span>
+    <span class="blocked">████████████████████████████████</span>
+    <span class="blocked">████████████████</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">-- This line spread to all servers</span>
+RS.Heartbeat:Connect(<span class="keyword">function</span>()
+  <span class="blocked">████████████████████████████████████</span>
+<span class="keyword">end</span>)
+</div>
+        <div class="copy-hint">▶ CLICK TO COPY SCRIPT</div>
+      </div>
+
+      <!-- SCRIPT CARD 2 -->
+      <div class="doc-card script-card">
+        <div class="script-header">
+          <span class="script-filename">ServerInject_v2_BROKEN.lua</span>
+          <div class="script-dots">
+            <span style="background:#c0392b"></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="script-body" onclick="copyScript(this, 1)"><span class="comment">-- ServerInject_v2 — Experimental
+-- Last modified: Day 2 of research
+-- Status: ERROR — DO NOT USE</span>
+
+<span class="keyword">local</span> RF = game.ReplicatedStorage
+<span class="keyword">local</span> RE = RF:WaitForChild(<span class="string">"<span class="blocked">████████</span>"</span>)
+
+<span class="comment">-- Workspace direct write attempt</span>
+<span class="keyword">pcall</span>(<span class="keyword">function</span>()
+  <span class="blocked">████████████████████████████████████</span>
+  <span class="blocked">████████████████████</span>
+  game.Workspace.<span class="blocked">████</span>.Parent = <span class="blocked">████████</span>
+<span class="keyword">end</span>)
+
+<span class="comment">-- The error started here ↓</span>
+RE.OnClientEvent:Connect(<span class="keyword">function</span>(data)
+  <span class="blocked">████████████████████████████████████</span>
+  <span class="comment">-- [INFINITE LOOP — THIS IS THE BUG]</span>
+  <span class="blocked">████████████████████████████████████</span>
+  <span class="blocked">████████████████████████████████████</span>
+<span class="keyword">end</span>)
+</div>
+        <div class="copy-hint">▶ CLICK TO COPY SCRIPT</div>
+      </div>
+
+      <!-- DOC: WARNING NOTE -->
+      <div class="doc-card" style="--rot: 1deg; background: linear-gradient(160deg, #fff0f0 0%, #ffd8d8 100%);">
+        <div class="doc-stamp" style="color:rgba(150,0,0,0.7); border-color:rgba(150,0,0,0.4)">URGENT</div>
+        <div class="doc-title" style="color:#8b0000;">⚠ Final Warning Note</div>
+        <div class="doc-body" style="color:#5a0000;">
+Siapapun yang membaca ini—
+
+Jangan pernah mencoba
+mereplikasi eksperimen ini.
+
+Script ini tidak hanya merusak
+Workspace. Ia merusak segalanya.
+
+Aku harap ini tidak jatuh ke
+tangan yang salah.
+
+— <span class="redacted">███████████</span>
+
+P.S. Maaf.
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <button class="back-btn" onclick="goBack()">← LOCK</button>
+</div>
+
+<script>
+  // ─── PIN SYSTEM ───
+  const CORRECT_PIN = "836492";
+  let currentPin = "";
+
+  function pressKey(key) {
+    if (key === 'del') {
+      currentPin = currentPin.slice(0, -1);
+    } else {
+      if (currentPin.length >= 6) return;
+      currentPin += key;
+    }
+    updateDots();
+    document.getElementById('pinError').textContent = '';
+  }
+
+  function updateDots() {
+    for (let i = 0; i < 6; i++) {
+      const dot = document.getElementById('d' + i);
+      dot.classList.toggle('filled', i < currentPin.length);
+    }
+  }
+
+  function submitPin() {
+    if (currentPin.length < 6) {
+      showError("ENTER 6-DIGIT PIN");
+      return;
+    }
+    if (currentPin === CORRECT_PIN) {
+      unlockSuccess();
+    } else {
+      showError("INCORRECT PIN — ACCESS DENIED");
+      const dots = document.getElementById('pinDisplay');
+      dots.style.animation = 'shake 0.3s ease';
+      setTimeout(() => {
+        dots.style.animation = '';
+        currentPin = "";
+        updateDots();
+      }, 400);
+    }
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('pinError');
+    el.textContent = msg;
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = 'shake 0.3s ease';
+  }
+
+  function unlockSuccess() {
+    const overlay = document.getElementById('glitchOverlay');
+    overlay.classList.add('active');
+
+    setTimeout(() => {
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.remove('hidden');
+    }, 400);
+
+    setTimeout(() => {
+      overlay.classList.remove('active');
+    }, 800);
+
+    currentPin = "";
+    updateDots();
+  }
+
+  function goBack() {
+    const overlay = document.getElementById('glitchOverlay');
+    overlay.classList.add('active');
+
+    setTimeout(() => {
+      document.getElementById('page2').classList.add('hidden');
+      document.getElementById('page1').classList.remove('hidden');
+      document.getElementById('pinError').textContent = '';
+    }, 400);
+
+    setTimeout(() => {
+      overlay.classList.remove('active');
+    }, 800);
+  }
+
+  // ─── COPY SCRIPTS ───
+  const scriptContents = [
+`-- [CLASSIFIED] WorkspaceCorruptor.lua
+-- ⚠ WARNING: This script caused the incident
+-- DO NOT EXECUTE under any circumstance
+
+local RS = game:GetService("RunService")
+local WS = game:GetService("Workspace")
+local Players = game:GetService("Players")
+
+-- [REDACTED INITIALIZATION]
+-- ████████████████████████████████████
+-- ████████████████████████████████████
+
+local function propagate(target)
+  -- [SECTION CORRUPTED]
+  -- ████████████████████████
+  for _, obj in pairs(target:GetDescendants()) do
+    -- ████████████████████████████████
+    -- ████████████████
+  end
+end
+
+-- This line spread to all servers
+RS.Heartbeat:Connect(function()
+  -- ████████████████████████████████████
+end)`,
+
+`-- ServerInject_v2 — Experimental
+-- Last modified: Day 2 of research
+-- Status: ERROR — DO NOT USE
+
+local RF = game.ReplicatedStorage
+local RE = RF:WaitForChild("████████")
+
+-- Workspace direct write attempt
+pcall(function()
+  -- ████████████████████████████████████
+  -- ████████████████████
+  game.Workspace.████.Parent = ████████
+end)
+
+-- The error started here ↓
+RE.OnClientEvent:Connect(function(data)
+  -- ████████████████████████████████████
+  -- [INFINITE LOOP — THIS IS THE BUG]
+  -- ████████████████████████████████████
+  -- ████████████████████████████████████
+end)`
+  ];
+
+  function copyScript(el, index) {
+    const text = scriptContents[index];
+    navigator.clipboard.writeText(text).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
+
+    const flash = document.getElementById('copyFlash');
+    flash.classList.add('show');
+    setTimeout(() => flash.classList.remove('show'), 1500);
+
+    const hint = el.nextElementSibling;
+    hint.textContent = '✓ COPIED';
+    hint.style.color = '#c0392b';
+    setTimeout(() => {
+      hint.textContent = '▶ CLICK TO COPY SCRIPT';
+      hint.style.color = '';
+    }, 2000);
+  }
+
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    const p1 = !document.getElementById('page1').classList.contains('hidden');
+    if (!p1) return;
+
+    if (e.key >= '0' && e.key <= '9') pressKey(e.key);
+    else if (e.key === 'Backspace') pressKey('del');
+    else if (e.key === 'Enter') submitPin();
+  });
+</script>
+</body>
+</html>
