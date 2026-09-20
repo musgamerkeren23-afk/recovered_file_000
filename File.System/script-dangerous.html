@@ -1004,53 +1004,7 @@ P.S. Maaf.
 
   // ─── COPY SCRIPTS ───
   const scriptContents = [
-`-- [CLASSIFIED] WorkspaceCorruptor.lua
--- ⚠ WARNING: This script caused the incident
--- DO NOT EXECUTE under any circumstance
-
-local RS = game:GetService("RunService")
-local WS = game:GetService("Workspace")
-local Players = game:GetService("Players")
-
--- [REDACTED INITIALIZATION]
--- ████████████████████████████████████
--- ████████████████████████████████████
-
-local function propagate(target)
-  -- [SECTION CORRUPTED]
-  -- ████████████████████████
-  for _, obj in pairs(target:GetDescendants()) do
-    -- ████████████████████████████████
-    -- ████████████████
-  end
-end
-
--- This line spread to all servers
-RS.Heartbeat:Connect(function()
-  -- ████████████████████████████████████
-end)`,
-
-`-- ServerInject_v2 — Experimental
--- Last modified: Day 2 of research
--- Status: ERROR — DO NOT USE
-
-local RF = game.ReplicatedStorage
-local RE = RF:WaitForChild("████████")
-
--- Workspace direct write attempt
-pcall(function()
-  -- ████████████████████████████████████
-  -- ████████████████████
-  game.Workspace.████.Parent = ████████
-end)
-
--- The error started here ↓
-RE.OnClientEvent:Connect(function(data)
-  -- ████████████████████████████████████
-  -- [INFINITE LOOP — THIS IS THE BUG]
-  -- ████████████████████████████████████
-  -- ████████████████████████████████████
-end)`
+``
   ];
 
   function copyScript(el, index) {
